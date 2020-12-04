@@ -1,0 +1,49 @@
+<div class="table-wrapper">
+
+    <hr><h2 style="text-align: center;">Country App - Angular Material </h2>
+    <hr><h3>{{isEditMode ? 'Edit Country' : 'Add New Country'}}</h3>
+
+    <form (submit)="onSubmit()" #countryForm="ngForm">
+        <mat-form-field>
+            <input matInput placeholder="Country Name" name="name" required [(ngModel)]="countryData.countryName">
+        </mat-form-field>
+
+        <ng-container *ngIf="isEditMode; else elseTemplate">
+            &nbsp;<button mat-stroked-button >Update</button>
+            &nbsp;<a mat-stroked-button (click)="cancelEdit()">Cancel</a>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+            &nbsp;<button mat-stroked-button>Add</button>
+        </ng-template>
+
+    </form>
+    <br>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="countryName">
+            <th mat-header-cell *matHeaderCellDef>Country name</th>
+            <td mat-cell *matCellDef="let element"> {{element.countryName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <a mat-stroked-button  href="javascript:void(0)" (click)="editCountry(element)">Update</a> &nbsp;
+                <a mat-stroked-button  href="javascript:void(0)" (click)="deleteCountry(element.id)">Delete</a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            [ngClass]="{'editable-row': countryData.id === row.id}"></tr>
+    </table>
+    <br><br><hr>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+
+</div>

@@ -1,0 +1,26 @@
+.table-wrapper{
+    max-width: 60%;
+    margin-top: 50px;
+    margin: 50px auto;
+}
+
+table{ 
+    width:100%
+}
+
+table th{
+    text-align: center; 
+    font-weight: bolder;
+}
+
+table td{
+    text-align: center; 
+}
+
+table tr {
+    text-align: center; 
+}
+
+tr.editable-row{
+    background-color: #aad2ffb0;
+} 
